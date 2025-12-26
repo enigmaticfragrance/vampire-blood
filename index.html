@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENIGMATIC FRAGRANCE</title>
+
+<style>
+body{margin:0;font-family:"Times New Roman",Times,serif}
+header{
+  background:linear-gradient(rgba(2,6,23,.8),rgba(2,6,23,.8)),
+  url("ENIGMATIC FRAGRANCE-02.jpg");
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+  padding:120px 20px;
+  text-align:center;
+}
+header h1{font-size:3rem;letter-spacing:3px}
+header p{font-size:1.3rem;font-style:italic;color:#e5e7eb;margin:20px 0}
+.btn{
+  background:#f59e0b;
+  color:#000;
+  padding:14px 32px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:bold;
+}
+section{padding:60px 20px;max-width:1100px;margin:auto}
+.checkout-section{background:#f8fafc}
+.checkout-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  border:2px solid #dc2626;
+  border-radius:18px;
+  padding:30px;
+}
+.billing label{display:block;margin-top:15px;font-weight:bold}
+.billing input,.billing textarea,.billing select{
+  width:100%;padding:12px;margin-top:6px;
+  border-radius:6px;border:1px solid #cbd5e1
+}
+.payment-box{
+  margin-top:10px;
+  background:#f1f5f9;
+  padding:12px;
+  border-radius:6px;
+}
+.payment-box input{font-weight:bold}
+.copy-btn{
+  margin-top:8px;
+  background:#0f172a;
+  color:#fff;
+  border:none;
+  padding:10px;
+  width:100%;
+  border-radius:6px;
+  cursor:pointer;
+}
+.product-image img{
+  max-width:100%;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25)
+}
+.order-summary{background:#f1f5f9;padding:25px;border-radius:12px}
+.order-row{display:flex;justify-content:space-between;margin:15px 0}
+.order-row.total{font-size:1.2rem;font-weight:bold}
+.place-order{
+  width:100%;
+  background:#dc2626;
+  color:#fff;
+  padding:16px;
+  font-size:1.1rem;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+footer{background:#020617;color:#cbd5f5;text-align:center;padding:20px}
+@media(max-width:768px){.checkout-box{grid-template-columns:1fr}}
+</style>
+
+<script>
+function updateTotal(){
+  const size=sizeSelect.value;
+  const delivery=deliverySelect.value;
+  const discount=Math.round(size*0.30);
+  const cod=size-discount;
+  productPrice.innerText=size;
+  discountAmount.innerText=discount;
+  advanceAmount.innerText=delivery;
+  codAmount.innerText=cod;
+  hiddenAdvance.value=delivery+"৳";
+  hiddenCOD.value=cod+"৳";
+  sizeText.innerText=sizeSelect.options[sizeSelect.selectedIndex].text.split("–")[0];
+}
+function showPayment(){
+  paymentBox.style.display="block";
+}
+function copyNumber(){
+  paymentNumber.select();
+  document.execCommand("copy");
+  alert("Number copied: 01570205364");
+}
+function validateForm(){
+  const phone=/^01[3-9]\d{8}$/;
+  if(!phone.test(customerPhone.value)){alert("সঠিক ফোন নাম্বার দিন");return false;}
+  if(!phone.test(senderNumber.value)){alert("সঠিক Sender নাম্বার দিন");return false;}
+  if(trx.value.length<8){alert("সঠিক Transaction ID দিন");return false;}
+  return true;
+}
+window.onload=updateTotal;
+</script>
+</head>
+
+<body>
+
+<header>
+  <h1>ENIGMATIC FRAGRANCE</h1>
+  <p>The Sign of luxurious Fragrance 🖤</p>
+  <a href="#checkout" class="btn">Order Now</a>
+</header>
+
+<section class="checkout-section" id="checkout">
+<div class="checkout-box">
+
+<form class="billing"
+action="https://formsubmit.co/enigmatic.fragrance@gmail.com"
+method="POST"
+onsubmit="return validateForm()">
+
+<h2>Billing & Advance Payment</h2>
+
+<input type="hidden" name="_captcha" value="false">
+<input type="hidden" name="_next" value="thankyou.html">
+<input type="hidden" id="hiddenAdvance" name="Advance Delivery Charge">
+<input type="hidden" id="hiddenCOD" name="Cash on Delivery Amount">
+
+<label>Full Name *</label>
+<input required name="Customer Name">
+
+<label>Customer Phone *</label>
+<input id="customerPhone" required name="Customer Phone">
+
+<label>Select Size *</label>
+<select id="sizeSelect" name="Product Size" onchange="updateTotal()">
+<option value="200">6ml – 200৳</option>
+<option value="420">15ml – 420৳</option>
+<option value="800" selected>30ml – 800৳</option>
+</select>
+
+<label>Delivery Area *</label>
+<select id="deliverySelect" name="Delivery Area" onchange="updateTotal()">
+<option value="80">Inside Dhaka – 80৳</option>
+<option value="120">Outside Dhaka – 120৳</option>
+</select>
+
+<label>Advance Payment Method *</label>
+<select name="Payment Method" onchange="showPayment()">
+<option value="">Select</option>
+<option>bKash</option>
+<option>Nagad</option>
+</select>
+
+<div id="paymentBox" class="payment-box" style="display:none">
+<label>Send Money Number</label>
+<input id="paymentNumber" value="01570205364" readonly>
+<button type="button" class="copy-btn" onclick="copyNumber()">Copy Number</button>
+</div>
+
+<label>Sender Mobile Number *</label>
+<input id="senderNumber" name="Sender Number">
+
+<label>Transaction ID *</label>
+<input id="trx" name="Transaction ID">
+
+<label>Address *</label>
+<textarea required name="Address"></textarea>
+
+<button class="place-order">Confirm Order</button>
+</form>
+
+<div>
+<div class="product-image">
+<img src="vampire-blood.jpg">
+</div>
+
+<div class="order-summary">
+<h2>Order Summary</h2>
+<div class="order-row">
+<span>Vampire Blood (<span id="sizeText">30ml</span>)</span>
+<strong><span id="productPrice">800</span>৳</strong>
+</div>
+<div class="order-row">
+<span>Discount (30%)</span>
+<strong>- <span id="discountAmount">240</span>৳</strong>
+</div>
+<div class="order-row">
+<span>Pay Now (Delivery)</span>
+<strong><span id="advanceAmount">80</span>৳</strong>
+</div>
+<hr>
+<div class="order-row total">
+<span>Pay on Delivery</span>
+<strong><span id="codAmount">560</span>৳</strong>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>© 2025 ENIGMATIC FRAGRANCE</footer>
+
+</body>
+</html>
