@@ -82,6 +82,28 @@ footer{background:#020617;color:#cbd5f5;text-align:center;padding:20px}
 </style>
 
 <script>
+/* ===== ELEMENTS ===== */
+const sizeSelect = document.getElementById("sizeSelect");
+const deliverySelect = document.getElementById("deliverySelect");
+
+const productPrice = document.getElementById("productPrice");
+const discountAmount = document.getElementById("discountAmount");
+const advanceAmount = document.getElementById("advanceAmount");
+const codAmount = document.getElementById("codAmount");
+const sizeText = document.getElementById("sizeText");
+
+const hiddenAdvance = document.getElementById("hiddenAdvance");
+const hiddenCOD = document.getElementById("hiddenCOD");
+const hiddenProductName = document.getElementById("hiddenProductName");
+const hiddenProductSize = document.getElementById("hiddenProductSize");
+
+const paymentBox = document.getElementById("paymentBox");
+const paymentNumber = document.getElementById("paymentNumber");
+const customerPhone = document.getElementById("customerPhone");
+const senderNumber = document.getElementById("senderNumber");
+const trx = document.getElementById("trx");
+
+/* ===== FUNCTIONS ===== */
 function updateTotal(){
   const size = Number(sizeSelect.value);
   const delivery = Number(deliverySelect.value);
@@ -102,19 +124,21 @@ function updateTotal(){
 
   sizeText.innerText = selectedSizeText;
 
-  // ✅ MAIL-এ পাঠানোর জন্য
+  /* ✅ MAIL-এ যাওয়ার জন্য */
   hiddenProductName.value = "Vampire Blood";
   hiddenProductSize.value = selectedSizeText;
 }
 
 function showPayment(){
-  paymentBox.style.display="block";
+  paymentBox.style.display = "block";
 }
+
 function copyNumber(){
   paymentNumber.select();
   document.execCommand("copy");
   alert("Number copied: 01570205364");
 }
+
 function validateForm(){
   const phone=/^01[3-9]\d{8}$/;
   if(!phone.test(customerPhone.value)){alert("সঠিক ফোন নাম্বার দিন");return false;}
@@ -122,7 +146,8 @@ function validateForm(){
   if(trx.value.length<8){alert("সঠিক Transaction ID দিন");return false;}
   return true;
 }
-window.onload=updateTotal;
+
+window.onload = updateTotal;
 </script>
 </head>
 
@@ -151,6 +176,8 @@ onsubmit="return validateForm()">
 value="https://enigmaticfragrance.github.io/vampire-blood/thankyou.html">
 <input type="hidden" id="hiddenAdvance" name="Advance Delivery Charge">
 <input type="hidden" id="hiddenCOD" name="Cash on Delivery Amount">
+<input type="hidden" id="hiddenProductName" name="Product Name">
+<input type="hidden" id="hiddenProductSize" name="Product Size (Text)">
 
 <label>Full Name *</label>
 <input required name="Customer Name">
@@ -230,6 +257,7 @@ value="https://enigmaticfragrance.github.io/vampire-blood/thankyou.html">
 
 </body>
 </html>
+
 
 
 
