@@ -81,74 +81,6 @@ footer{background:#020617;color:#cbd5f5;text-align:center;padding:20px}
 @media(max-width:768px){.checkout-box{grid-template-columns:1fr}}
 </style>
 
-<script>
-/* ===== ELEMENTS ===== */
-const sizeSelect = document.getElementById("sizeSelect");
-const deliverySelect = document.getElementById("deliverySelect");
-
-const productPrice = document.getElementById("productPrice");
-const discountAmount = document.getElementById("discountAmount");
-const advanceAmount = document.getElementById("advanceAmount");
-const codAmount = document.getElementById("codAmount");
-const sizeText = document.getElementById("sizeText");
-
-const hiddenAdvance = document.getElementById("hiddenAdvance");
-const hiddenCOD = document.getElementById("hiddenCOD");
-const hiddenProductName = document.getElementById("hiddenProductName");
-const hiddenProductSize = document.getElementById("hiddenProductSize");
-
-const paymentBox = document.getElementById("paymentBox");
-const paymentNumber = document.getElementById("paymentNumber");
-const customerPhone = document.getElementById("customerPhone");
-const senderNumber = document.getElementById("senderNumber");
-const trx = document.getElementById("trx");
-
-/* ===== FUNCTIONS ===== */
-function updateTotal(){
-  const size = Number(sizeSelect.value);
-  const delivery = Number(deliverySelect.value);
-
-  const discount = Math.round(size * 0.30);
-  const cod = size - discount;
-
-  productPrice.innerText = size;
-  discountAmount.innerText = discount;
-  advanceAmount.innerText = delivery;
-  codAmount.innerText = cod;
-
-  hiddenAdvance.value = delivery + "৳";
-  hiddenCOD.value = cod + "৳";
-
-  const selectedSizeText =
-    sizeSelect.options[sizeSelect.selectedIndex].text.split("–")[0].trim();
-
-  sizeText.innerText = selectedSizeText;
-
-  /* ✅ MAIL-এ যাওয়ার জন্য */
-  hiddenProductName.value = "Vampire Blood";
-  hiddenProductSize.value = selectedSizeText;
-}
-
-function showPayment(){
-  paymentBox.style.display = "block";
-}
-
-function copyNumber(){
-  paymentNumber.select();
-  document.execCommand("copy");
-  alert("Number copied: 01570205364");
-}
-
-function validateForm(){
-  const phone=/^01[3-9]\d{8}$/;
-  if(!phone.test(customerPhone.value)){alert("সঠিক ফোন নাম্বার দিন");return false;}
-  if(!phone.test(senderNumber.value)){alert("সঠিক Sender নাম্বার দিন");return false;}
-  if(trx.value.length<8){alert("সঠিক Transaction ID দিন");return false;}
-  return true;
-}
-
-window.onload = updateTotal;
-</script>
 </head>
 
 <body>
@@ -166,8 +98,7 @@ window.onload = updateTotal;
 action="https://formsubmit.co/enigmatic.fragrance@gmail.com"
 method="POST"
 onsubmit="return validateForm()">
-<input type="hidden" id="hiddenProductName" name="Product Name">
-<input type="hidden" id="hiddenProductSize" name="Product Size (Text)">
+
 
 <h2>Billing & Advance Payment</h2>
 
@@ -255,8 +186,79 @@ value="https://enigmaticfragrance.github.io/vampire-blood/thankyou.html">
 
 <footer>© 2025 ENIGMATIC FRAGRANCE</footer>
 
+  <!-- 🔽 SCRIPT HERE -->
+<script>
+/* ===== ELEMENTS ===== */
+const sizeSelect = document.getElementById("sizeSelect");
+const deliverySelect = document.getElementById("deliverySelect");
+
+const productPrice = document.getElementById("productPrice");
+const discountAmount = document.getElementById("discountAmount");
+const advanceAmount = document.getElementById("advanceAmount");
+const codAmount = document.getElementById("codAmount");
+const sizeText = document.getElementById("sizeText");
+
+const hiddenAdvance = document.getElementById("hiddenAdvance");
+const hiddenCOD = document.getElementById("hiddenCOD");
+const hiddenProductName = document.getElementById("hiddenProductName");
+const hiddenProductSize = document.getElementById("hiddenProductSize");
+
+const paymentBox = document.getElementById("paymentBox");
+const paymentNumber = document.getElementById("paymentNumber");
+const customerPhone = document.getElementById("customerPhone");
+const senderNumber = document.getElementById("senderNumber");
+const trx = document.getElementById("trx");
+
+/* ===== FUNCTIONS ===== */
+function updateTotal(){
+  const size = Number(sizeSelect.value);
+  const delivery = Number(deliverySelect.value);
+
+  const discount = Math.round(size * 0.30);
+  const cod = size - discount;
+
+  productPrice.innerText = size;
+  discountAmount.innerText = discount;
+  advanceAmount.innerText = delivery;
+  codAmount.innerText = cod;
+
+  hiddenAdvance.value = delivery + "৳";
+  hiddenCOD.value = cod + "৳";
+
+  const selectedSizeText =
+    sizeSelect.options[sizeSelect.selectedIndex].text.split("–")[0].trim();
+
+  sizeText.innerText = selectedSizeText;
+
+  /* ✅ MAIL-এ যাওয়ার জন্য */
+  hiddenProductName.value = "Vampire Blood";
+  hiddenProductSize.value = selectedSizeText;
+}
+
+function showPayment(){
+  paymentBox.style.display = "block";
+}
+
+function copyNumber(){
+  paymentNumber.select();
+  document.execCommand("copy");
+  alert("Number copied: 01570205364");
+}
+
+function validateForm(){
+  const phone=/^01[3-9]\d{8}$/;
+  if(!phone.test(customerPhone.value)){alert("সঠিক ফোন নাম্বার দিন");return false;}
+  if(!phone.test(senderNumber.value)){alert("সঠিক Sender নাম্বার দিন");return false;}
+  if(trx.value.length<8){alert("সঠিক Transaction ID দিন");return false;}
+  return true;
+}
+
+window.onload = updateTotal;
+</script>
+  
 </body>
 </html>
+
 
 
 
