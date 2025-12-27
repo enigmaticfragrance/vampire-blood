@@ -123,10 +123,13 @@ value="https://enigmaticfragrance.github.io/vampire-blood/thankyou.html">
 <option value="800" selected>30ml – 800৳</option>
 </select>
 
+<!-- Delivery Area -->
 <label>Delivery Area *</label>
-<select id="deliverySelect" name="Delivery Area" onchange="updateTotal()">
-<option value="80">Inside Dhaka – 80৳</option>
-<option value="120">Outside Dhaka – 120৳</option>
+<select id="deliverySelect" onchange="updateTotal()" required>
+  <option value="80">Inside Dhaka – 80৳</option>
+  <option value="120">Outside Dhaka – 120৳</option>
+</select>
+
 </select>
 
 <label>Advance Payment Method *</label>
@@ -229,14 +232,19 @@ function updateTotal(){
   hiddenAdvance.value = delivery + "৳";
   hiddenCOD.value = cod + "৳";
 
+  /* Size text */
   const selectedSizeText =
     sizeSelect.options[sizeSelect.selectedIndex].text.split("–")[0].trim();
-
   sizeText.innerText = selectedSizeText;
 
-  /* ✅ MAIL-এ যাওয়ার জন্য */
+  /* Delivery full text */
+  const deliveryText =
+    deliverySelect.options[deliverySelect.selectedIndex].text;
+
+  /* MAIL values */
   hiddenProductName.value = "Vampire Blood";
   hiddenProductSize.value = selectedSizeText;
+  hiddenDeliveryArea.value = deliveryText;
 }
 
 function showPayment(){
@@ -262,6 +270,7 @@ window.onload = updateTotal;
   
 </body>
 </html>
+
 
 
 
