@@ -83,18 +83,30 @@ footer{background:#020617;color:#cbd5f5;text-align:center;padding:20px}
 
 <script>
 function updateTotal(){
-  const size=sizeSelect.value;
-  const delivery=deliverySelect.value;
-  const discount=Math.round(size*0.30);
-  const cod=size-discount;
-  productPrice.innerText=size;
-  discountAmount.innerText=discount;
-  advanceAmount.innerText=delivery;
-  codAmount.innerText=cod;
-  hiddenAdvance.value=delivery+"৳";
-  hiddenCOD.value=cod+"৳";
-  sizeText.innerText=sizeSelect.options[sizeSelect.selectedIndex].text.split("–")[0];
+  const size = Number(sizeSelect.value);
+  const delivery = Number(deliverySelect.value);
+
+  const discount = Math.round(size * 0.30);
+  const cod = size - discount;
+
+  productPrice.innerText = size;
+  discountAmount.innerText = discount;
+  advanceAmount.innerText = delivery;
+  codAmount.innerText = cod;
+
+  hiddenAdvance.value = delivery + "৳";
+  hiddenCOD.value = cod + "৳";
+
+  const selectedSizeText =
+    sizeSelect.options[sizeSelect.selectedIndex].text.split("–")[0].trim();
+
+  sizeText.innerText = selectedSizeText;
+
+  // ✅ MAIL-এ পাঠানোর জন্য
+  hiddenProductName.value = "Vampire Blood";
+  hiddenProductSize.value = selectedSizeText;
 }
+
 function showPayment(){
   paymentBox.style.display="block";
 }
@@ -218,6 +230,7 @@ value="https://enigmaticfragrance.github.io/vampire-blood/thankyou.html">
 
 </body>
 </html>
+
 
 
 
