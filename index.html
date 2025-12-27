@@ -130,10 +130,14 @@ value="https://enigmaticfragrance.github.io/vampire-blood/thankyou.html">
 </select>
 
 <label>Advance Payment Method *</label>
-<select name="Payment Method" onchange="showPayment()">
-<option value="">Select</option>
-<option>bKash</option>
-<option>Nagad</option>
+<select name="Payment_Method" onchange="showPayment()" required>
+  <option value="">Select</option>
+  <option value="bKash">bKash</option>
+  <option value="Nagad">Nagad</option>
+</select>
+
+</select>
+
 </select>
 
 <div id="paymentBox" class="payment-box" style="display:none">
@@ -258,6 +262,7 @@ window.onload = updateTotal;
   
 </body>
 </html>
+
 
 
 
