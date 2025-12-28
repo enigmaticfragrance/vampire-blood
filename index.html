@@ -77,6 +77,16 @@ section{padding:60px 20px;max-width:1100px;margin:auto}
   font-weight:bold;
   cursor:pointer;
 }
+  .note-red{
+  color:#dc2626;
+  font-size:0.85rem;
+}
+
+.note-silver{
+  color:#94a3b8;
+  font-size:0.8rem;
+}
+
 footer{background:#020617;color:#cbd5f5;text-align:center;padding:20px}
 @media(max-width:768px){.checkout-box{grid-template-columns:1fr}}
 </style>
@@ -137,11 +147,16 @@ value="https://enigmaticfragrance.github.io/vampire-blood/thankyou.html">
 </select>
 
 <label>Advance Payment Method *</label>
+<p class="note-red">
+  (Order Confirm করার জন্য ডেলিভারি চার্জ অগ্রিম দিতে হবে)
+</p>
+
 <select name="Payment_Method" onchange="showPayment()" required>
   <option value="">Select</option>
   <option value="bKash">bKash</option>
   <option value="Nagad">Nagad</option>
 </select>
+
 
 </select>
 
@@ -155,6 +170,12 @@ value="https://enigmaticfragrance.github.io/vampire-blood/thankyou.html">
 
 <label>Sender Mobile Number *</label>
 <input id="senderNumber" name="Sender Number">
+<label>Sender Mobile Number *</label>
+<p class="note-silver">
+  (যে বিকাশ/নগদ নাম্বার দিয়ে Delivery Charge দেওয়া হয়েছে)
+</p>
+
+<input id="senderNumber" name="Sender Number" required>
 
 <label>Transaction ID *</label>
 <input id="trx" name="Transaction ID">
@@ -295,6 +316,7 @@ window.onload = updateTotal;
   
 </body>
 </html>
+
 
 
 
