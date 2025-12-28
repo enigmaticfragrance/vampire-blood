@@ -161,7 +161,11 @@ value="https://enigmaticfragrance.github.io/vampire-blood/thankyou.html">
 
 <label>Address *</label>
 <textarea required name="Address"></textarea>
-
+<!-- ✅ Additional Note -->
+<label>Additional Note (Optional)</label>
+<textarea name="Additional_Note"
+placeholder="Delivery instruction / special request (optional)"
+rows="3"></textarea>
 <button class="place-order">Confirm Order</button>
 </form>
 
@@ -213,6 +217,7 @@ const hiddenAdvance = document.getElementById("hiddenAdvance");
 const hiddenCOD = document.getElementById("hiddenCOD");
 const hiddenProductName = document.getElementById("hiddenProductName");
 const hiddenProductSize = document.getElementById("hiddenProductSize");
+const hiddenDeliveryArea = document.getElementById("hiddenDeliveryArea");
 
 const paymentBox = document.getElementById("paymentBox");
 const paymentNumber = document.getElementById("paymentNumber");
@@ -222,12 +227,14 @@ const trx = document.getElementById("trx");
 
 /* ===== FUNCTIONS ===== */
 function updateTotal(){
+
   const size = Number(sizeSelect.value);
   const delivery = Number(deliverySelect.value);
 
   const discount = Math.round(size * 0.30);
   const cod = size - discount;
 
+  /* Price calculation */
   productPrice.innerText = size;
   discountAmount.innerText = discount;
   advanceAmount.innerText = delivery;
@@ -236,16 +243,21 @@ function updateTotal(){
   hiddenAdvance.value = delivery + "৳";
   hiddenCOD.value = cod + "৳";
 
+  /* ===================== */
   /* Size text */
+  /* ===================== */
   const selectedSizeText =
-    sizeSelect.options[sizeSelect.selectedIndex].text.split("–")[0].trim();
+    sizeSelect.options[sizeSelect.selectedIndex]
+    .text.split("–")[0].trim();
+
   sizeText.innerText = selectedSizeText;
 
-  /* Delivery full text */
+  /* ===================== */
+  /* MAIL values */
+  /* ===================== */
   const deliveryText =
     deliverySelect.options[deliverySelect.selectedIndex].text;
 
-  /* MAIL values */
   hiddenProductName.value = "Vampire Blood";
   hiddenProductSize.value = selectedSizeText;
   hiddenDeliveryArea.value = deliveryText;
@@ -258,14 +270,23 @@ function showPayment(){
 function copyNumber(){
   paymentNumber.select();
   document.execCommand("copy");
-  alert("Number copied: 01570205364");
+  alert("Number copied");
 }
 
 function validateForm(){
   const phone=/^01[3-9]\d{8}$/;
-  if(!phone.test(customerPhone.value)){alert("সঠিক ফোন নাম্বার দিন");return false;}
-  if(!phone.test(senderNumber.value)){alert("সঠিক Sender নাম্বার দিন");return false;}
-  if(trx.value.length<8){alert("সঠিক Transaction ID দিন");return false;}
+  if(!phone.test(customerPhone.value)){
+    alert("সঠিক ফোন নাম্বার দিন");
+    return false;
+  }
+  if(!phone.test(senderNumber.value)){
+    alert("সঠিক Sender নাম্বার দিন");
+    return false;
+  }
+  if(trx.value.length < 8){
+    alert("সঠিক Transaction ID দিন");
+    return false;
+  }
   return true;
 }
 
@@ -274,6 +295,7 @@ window.onload = updateTotal;
   
 </body>
 </html>
+
 
 
 
